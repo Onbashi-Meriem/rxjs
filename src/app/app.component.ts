@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { of } from 'rxjs';
+import { interval, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +11,18 @@ export class AppComponent {
 
   constructor(){
      
-    const values=of('fatih', 4,[1,2,3,4],'mehmet',4.12)
+    // const values=of('fatih', 4,[1,2,3,4],'mehmet',4.12)
 
-    values.subscribe(data=>{
-      console.log(data)
+    // values.subscribe(data=>{
+    //   console.log(data)
+    // })
+
+    const publisher=interval(1000)
+
+    publisher.subscribe(val=>{
+      console.log("data",val)
+    },err=>{},()=>{
+      console.log('islem bitti')
     })
   }
 }
