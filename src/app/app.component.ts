@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, Observable, of, range, Subscription, timer } from 'rxjs';
+import { from, interval, Observable, of, range, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -43,16 +43,45 @@ export class AppComponent {
   //     }
   //   );
 
-  let publisher=range(0,20)
+  // -----------range----------
 
-  publisher.subscribe((val)=>{
-    console.log(val)
+  // let publisher=range(0,20)
 
-  },err=>{},()=>{
-    console.log('islem tamamlandi')
-  })
-  }
+  // publisher.subscribe((val)=>{
+  //   console.log(val)
 
+  // },err=>{},()=>{
+  //   console.log('islem tamamlandi')
+  // })
+ 
+
+
+  // ----------from-----------
+
+  const map=new Map();
+
+  map.set(1,'Kitaplar');
+  map.set(  2,'Kalemler');
+  map.set(  3,'Silgiler');
+
+  const publisher=from(map)
+
+this.subscription=publisher.subscribe((val)=>{
+
+  console.log(`${val[0]} = ${val[1]}`);
+  console.log(val);
+  console.log(typeof val, typeof `${val}`)
+  console.log(`${val}`);
+  
+  
+  
+},err=>{},()=>{
+  console.log('islem tamamlandi');
+  
+})
+
+
+ }
   stop() {
     // this.subscription.unsubscribe();
   }
