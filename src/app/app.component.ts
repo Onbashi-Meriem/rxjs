@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, Observable, of, Subscription, timer } from 'rxjs';
+import { interval, Observable, of, range, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -31,20 +31,29 @@ export class AppComponent {
 
     // ----------timer----------
 
-    const publisher = timer(5000, 1000);
+  //   const publisher = timer(5000, 1000);
 
-    this.subscription = publisher.subscribe(
-      (val) => {
-        console.log('Bu islem sayfada 5 sn sonra görünecek =' + val);
-      },
-      (err) => {},
-      () => {
-        console.log('islem tamamlandi');
-      }
-    );
+  //   this.subscription = publisher.subscribe(
+  //     (val) => {
+  //       console.log('Bu islem sayfada 5 sn sonra görünecek =' + val);
+  //     },
+  //     (err) => {},
+  //     () => {
+  //       console.log('islem tamamlandi');
+  //     }
+  //   );
+
+  let publisher=range(0,20)
+
+  publisher.subscribe((val)=>{
+    console.log(val)
+
+  },err=>{},()=>{
+    console.log('islem tamamlandi')
+  })
   }
 
   stop() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }
