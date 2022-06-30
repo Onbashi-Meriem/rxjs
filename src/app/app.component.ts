@@ -8,6 +8,7 @@ import {
   range,
   Subscription,
   timer,
+  Observer,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -107,18 +108,35 @@ export class AppComponent {
 
     // ----------------ajax--------------
 
-    const ajaxRequest = ajax.getJSON(
-      'https://jsonplaceholder.typicode.com/todos/1'
-    );
-    ajaxRequest.subscribe(
-      (data) => {
-        console.table(data);
-      },
-      (err) => {
-        console.log(err.message);
+    // const ajaxRequest = ajax.getJSON(
+    //   'https://jsonplaceholder.typicode.com/todos/1'
+    // );
+    // ajaxRequest.subscribe(
+    //   (data) => {
+    //     console.table(data);
+    //   },
+    //   (err) => {
+    //     console.log(err.message);
+    //   },
+    //   () => {
+    //     console.log('ajax request tamamlandi');
+    //   }
+    // );
+
+    // -------------create-----------------
+
+    const myObservable = Observable.create((observer: Observer<any>) => {
+      observer.next('meriem onbashi ugurlu');
+      observer.next('Name Surname');
+      observer.complete();
+    });
+
+    myObservable.subscribe(
+      (data: any) => {
+        console.log(data);
       },
       () => {
-        console.log('ajax request tamamlandi');
+        console.log('islem tamamlandi');
       }
     );
   }
