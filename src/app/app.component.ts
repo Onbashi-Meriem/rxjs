@@ -1,5 +1,15 @@
 import { Component } from '@angular/core';
-import { defer, from, interval, Observable, of, range, Subscription, timer } from 'rxjs';
+import {
+  defer,
+  from,
+  interval,
+  Observable,
+  of,
+  range,
+  Subscription,
+  timer,
+} from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-root',
@@ -31,71 +41,87 @@ export class AppComponent {
 
     // ----------timer----------
 
-  //   const publisher = timer(5000, 1000);
+    //   const publisher = timer(5000, 1000);
 
-  //   this.subscription = publisher.subscribe(
-  //     (val) => {
-  //       console.log('Bu islem sayfada 5 sn sonra görünecek =' + val);
-  //     },
-  //     (err) => {},
-  //     () => {
-  //       console.log('islem tamamlandi');
-  //     }
-  //   );
+    //   this.subscription = publisher.subscribe(
+    //     (val) => {
+    //       console.log('Bu islem sayfada 5 sn sonra görünecek =' + val);
+    //     },
+    //     (err) => {},
+    //     () => {
+    //       console.log('islem tamamlandi');
+    //     }
+    //   );
 
-  // -----------range----------
+    // -----------range----------
 
-  // let publisher=range(0,20)
+    // let publisher=range(0,20)
 
-  // publisher.subscribe((val)=>{
-  //   console.log(val)
+    // publisher.subscribe((val)=>{
+    //   console.log(val)
 
-  // },err=>{},()=>{
-  //   console.log('islem tamamlandi')
-  // })
- 
+    // },err=>{},()=>{
+    //   console.log('islem tamamlandi')
+    // })
 
+    // ----------from-----------
 
-  // ----------from-----------
+    //   const map=new Map();
 
-//   const map=new Map();
+    //   map.set(1,'Kitaplar');
+    //   map.set(  2,'Kalemler');
+    //   map.set(  3,'Silgiler');
 
-//   map.set(1,'Kitaplar');
-//   map.set(  2,'Kalemler');
-//   map.set(  3,'Silgiler');
+    //   const publisher=from(map)
 
-//   const publisher=from(map)
+    // this.subscription=publisher.subscribe((val)=>{
 
-// this.subscription=publisher.subscribe((val)=>{
+    //   console.log(`${val[0]} = ${val[1]}`);
+    //   console.log(val);
+    //   console.log(typeof val, typeof `${val}`)
+    //   console.log(`${val}`);
 
-//   console.log(`${val[0]} = ${val[1]}`);
-//   console.log(val);
-//   console.log(typeof val, typeof `${val}`)
-//   console.log(`${val}`);
+    // },err=>{},()=>{
+    //   console.log('islem tamamlandi');
 
-// },err=>{},()=>{
-//   console.log('islem tamamlandi');
-  
-// })
+    // })
 
-const publisher=of(new Date())
-const publisher2=defer(()=>of(new Date()))
+    // ------------defer---------
 
-const myTimer=timer(3000)
+    // const publisher=of(new Date())
+    // const publisher2=defer(()=>of(new Date()))
 
-myTimer.subscribe((val)=>{
-publisher.subscribe(date1=>{
-  console.log('date without defer', date1,)
-})
-publisher2.subscribe(date2=>{
-  console.log('date with defer', date2,)
-})
-},()=>{
-  console.log('islem tamamlandi');
-  
-})
+    // const myTimer=timer(3000)
 
- }
+    // myTimer.subscribe((val)=>{
+    // publisher.subscribe(date1=>{
+    //   console.log('date without defer', date1,)
+    // })
+    // publisher2.subscribe(date2=>{
+    //   console.log('date with defer', date2,)
+    // })
+    // },()=>{
+    //   console.log('islem tamamlandi');
+
+    // })
+
+    // ----------------ajax--------------
+
+    const ajaxRequest = ajax.getJSON(
+      'https://jsonplaceholder.typicode.com/todos/1'
+    );
+    ajaxRequest.subscribe(
+      (data) => {
+        console.table(data);
+      },
+      (err) => {
+        console.log(err.message);
+      },
+      () => {
+        console.log('ajax request tamamlandi');
+      }
+    );
+  }
   stop() {
     // this.subscription.unsubscribe();
   }
