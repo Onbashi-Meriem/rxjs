@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { from, interval, Observable, of, range, Subscription, timer } from 'rxjs';
+import { defer, from, interval, Observable, of, range, Subscription, timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -58,28 +58,42 @@ export class AppComponent {
 
   // ----------from-----------
 
-  const map=new Map();
+//   const map=new Map();
 
-  map.set(1,'Kitaplar');
-  map.set(  2,'Kalemler');
-  map.set(  3,'Silgiler');
+//   map.set(1,'Kitaplar');
+//   map.set(  2,'Kalemler');
+//   map.set(  3,'Silgiler');
 
-  const publisher=from(map)
+//   const publisher=from(map)
 
-this.subscription=publisher.subscribe((val)=>{
+// this.subscription=publisher.subscribe((val)=>{
 
-  console.log(`${val[0]} = ${val[1]}`);
-  console.log(val);
-  console.log(typeof val, typeof `${val}`)
-  console.log(`${val}`);
+//   console.log(`${val[0]} = ${val[1]}`);
+//   console.log(val);
+//   console.log(typeof val, typeof `${val}`)
+//   console.log(`${val}`);
+
+// },err=>{},()=>{
+//   console.log('islem tamamlandi');
   
-  
-  
-},err=>{},()=>{
+// })
+
+const publisher=of(new Date())
+const publisher2=defer(()=>of(new Date()))
+
+const myTimer=timer(3000)
+
+myTimer.subscribe((val)=>{
+publisher.subscribe(date1=>{
+  console.log('date without defer', date1,)
+})
+publisher2.subscribe(date2=>{
+  console.log('date with defer', date2,)
+})
+},()=>{
   console.log('islem tamamlandi');
   
 })
-
 
  }
   stop() {
