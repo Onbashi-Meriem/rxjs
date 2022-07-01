@@ -14,6 +14,7 @@ import {
   find,
   filter,
   last,
+  single,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -68,5 +69,24 @@ export class AppComponent {
     //   console.log(err.message);
       
     // })
+ //  -------------single-----------sarti saglayan tek bir deger varsa getirir, daha fazla deger varsa hata verir.
+    const source1 = of(
+      { name: 'Ben' },
+      { name: 'Tracy' },
+      { name: 'Laney' },
+      { name: 'Lily' }
+     );
+
+     source1.pipe(single(val=>val.name.startsWith('B'))).subscribe(data=>{
+      console.log(data)
+     },err=>{
+      console.log(err.message)
+     })
+
+     source1.pipe(single(val=>val.name.startsWith('L'))).subscribe(data=>{
+      console.log(data)
+     },err=>{
+      console.log(err.message)
+     })
   }
 }
