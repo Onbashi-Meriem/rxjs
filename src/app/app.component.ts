@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import {
   defer,
   from,
@@ -9,6 +9,7 @@ import {
   Subscription,
   timer,
   Observer,
+  fromEvent,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -17,9 +18,12 @@ import { ajax } from 'rxjs/ajax';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit  {
   title = 'rxjs';
   subscription: Subscription;
+  @ViewChild('btn') btn:ElementRef
+
+  
 
   constructor() {
     //--------of----------
@@ -125,22 +129,35 @@ export class AppComponent {
 
     // -------------create-----------------
 
-    const myObservable = Observable.create((observer: Observer<any>) => {
-      observer.next('meriem onbashi ugurlu');
-      observer.next('Name Surname');
-      observer.complete();
-    });
+    // const myObservable = Observable.create((observer: Observer<any>) => {
+    //   observer.next('meriem onbashi ugurlu');
+    //   observer.next('Name Surname');
+    //   observer.complete();
+    // });
 
-    myObservable.subscribe(
-      (data: any) => {
-        console.log(data);
-      },
-      () => {
-        console.log('islem tamamlandi');
-      }
-    );
+    // myObservable.subscribe(
+    //   (data: any) => {
+    //     console.log(data);
+    //   },
+    //   () => {
+    //     console.log('islem tamamlandi');
+    //   }
+    // );
+
+   
+
+
+  }
+  ngAfterViewInit(): void {
+     // ------------fromEvent--------------
+
+    fromEvent(this.btn.nativeElement, 'click').subscribe(data=>{
+      console.log(data)
+    })
   }
   stop() {
     // this.subscription.unsubscribe();
   }
 }
+
+
