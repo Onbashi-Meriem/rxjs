@@ -15,6 +15,7 @@ import {
   filter,
   last,
   single,
+  distinct,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -28,7 +29,7 @@ export class AppComponent {
   subscription: Subscription;
 
   constructor() {
-    const myArray = from([5, 10, 15, 20, 30, 40, 300, 600, 12 ,18]);
+    // const myArray = from([5, 10, 15, 20, 30, 40, 300, 600, 12 ,18]);
 
     // -------------first-------
 
@@ -70,23 +71,31 @@ export class AppComponent {
       
     // })
  //  -------------single-----------sarti saglayan tek bir deger varsa getirir, daha fazla deger varsa hata verir.
-    const source1 = of(
-      { name: 'Ben' },
-      { name: 'Tracy' },
-      { name: 'Laney' },
-      { name: 'Lily' }
-     );
+    // const source1 = of(
+    //   { name: 'Ben' },
+    //   { name: 'Tracy' },
+    //   { name: 'Laney' },
+    //   { name: 'Lily' }
+    //  );
 
-     source1.pipe(single(val=>val.name.startsWith('B'))).subscribe(data=>{
-      console.log(data)
-     },err=>{
-      console.log(err.message)
-     })
+    //  source1.pipe(single(val=>val.name.startsWith('B'))).subscribe(data=>{
+    //   console.log(data)
+    //  },err=>{
+    //   console.log(err.message)
+    //  })
 
-     source1.pipe(single(val=>val.name.startsWith('L'))).subscribe(data=>{
+    //  source1.pipe(single(val=>val.name.startsWith('L'))).subscribe(data=>{
+    //   console.log(data)
+    //  },err=>{
+    //   console.log(err.message)
+    //  })
+
+    const myArray = from([5, 10, 15, 10, 30, 40, 30,  10 ,15]);
+
+    myArray.pipe(distinct()).subscribe(data=>{
       console.log(data)
-     },err=>{
-      console.log(err.message)
-     })
+    })
+
   }
 }
+1
