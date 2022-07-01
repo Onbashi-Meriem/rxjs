@@ -12,7 +12,8 @@ import {
   fromEvent,
   first,
   find,
-  filter
+  filter,
+  last,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -26,7 +27,7 @@ export class AppComponent {
   subscription: Subscription;
 
   constructor() {
-    const myArray = from([5, 10, 15, 20, 30, 40, 300, 600]);
+    const myArray = from([5, 10, 15, 20, 30, 40, 300, 600, 12 ,18]);
 
     // -------------first-------
 
@@ -53,12 +54,19 @@ export class AppComponent {
     //   console.log("find metodu",data)
     // })
 
-     // --------------filter--------- sarti saglayan her degeri doner
+    // --------------filter--------- sarti saglayan her degeri doner
 
-     myArray.pipe(filter(val=>val>15)).subscribe(data=>{
-      console.log(data)
-     })
+    //  myArray.pipe(filter(val=>val>15)).subscribe(data=>{
+    //   console.log(data)
+    //  })
 
+    //  -------------last-----------sarti saglayan son degeri getirir
 
+    // myArray.pipe(last((val) => val % 3 === 0)).subscribe(data => {
+    //   console.log(data)
+    // },err=>{
+    //   console.log(err.message);
+      
+    // })
   }
 }
