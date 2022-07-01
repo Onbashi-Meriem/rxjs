@@ -19,8 +19,12 @@ import {
   debounceTime,
   skip,
   skipUntil,
+  skipWhile,
+  takeLast,
+  takeWhile,
 } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -109,6 +113,38 @@ export class AppComponent implements AfterViewInit {
     // myInterval.pipe(skipUntil(myClick)).subscribe((data) => {
     //   console.log(data);
     // });
+
+    // ------------skipWhile------------- kosula uyanlari atlar
+
+    // from([1, 2, 3, 4, 5, 6])
+    //   .pipe(skipWhile((x) => x < 4))
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
+
+    // ----------take---------
+
+    // from([1, 2, 3, 4, 5, 6])
+    //   .pipe(take(3))
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
+
+    // ----------takeLast---------
+
+    // from([1, 2, 3, 4, 5, 6])
+    //   .pipe(takeLast(2))
+    //   .subscribe((data) => {
+    //     console.log(data);
+    //   });
+
+    // ----------takeWhile--------- kosulu saglayanlari alir
+
+    from([1, 2, 3, 4, 5, 6])
+      .pipe(takeWhile(x=>x<3))
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   ngAfterViewInit(): void {
